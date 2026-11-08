@@ -1,57 +1,26 @@
 # The Code is Not the Text: Generator 101
 
-This is one of @shadoof's first [Observable Framework](https://observablehq.com/framework) projects. It’s a simple one derived from something I did for [Bad Quarto’s *Our Generation*](https://badquar.to/publications/our_generation.html).
+a generator that writes 101 statements of the form “the code is not the text unless it is the text”. Made for Nick Monfort et al., [*Our Generation*](https://badquar.to/publications/our_generation.html) (2024). Refresh the page to regenerate.
 
-To view the static site produced by this framework go to: https://shadoof.observablehq.cloud/code-is-not-text-unless/
+Refactored (2026-11-08) from the Observable Framework project `codeisnottextunless` into an
+[Observable Notebook Kit](https://observablehq.com/notebook-kit/) project.
+Co-implemented with Claude Sonnet 5.5.
 
-Notes from here on refer to Framework development in general. To start the local preview server, run:
+## Commands
 
-```
-npm run dev
-```
-
-Then visit <http://localhost:3000> to preview your project.
-
-For more, see <https://observablehq.com/framework/getting-started>.
-
-## Project structure
-
-A typical Framework project looks like this:
-
-```ini
-.
-├─ src
-│  ├─ components
-│  │  └─ timeline.js           # an importable module
-│  ├─ data
-│  │  ├─ launches.csv.js       # a data loader
-│  │  └─ events.json           # a static data file
-│  ├─ example-dashboard.md     # a page
-│  ├─ example-report.md        # another page
-│  └─ index.md                 # the home page
-├─ .gitignore
-├─ observablehq.config.js      # the project config file
-├─ package.json
-└─ README.md
+```sh
+npm install
+npm run preview   # http://localhost:5173
+npm run build     # builds into dist/
 ```
 
-**`src`** - This is the “source root” — where your source files live. Pages go here. Each page is a Markdown file. Observable Framework uses [file-based routing](https://observablehq.com/framework/routing), which means that the name of the file controls where the page is served. You can create as many pages as you like. Use folders to organize your pages.
+## Where things went
 
-**`src/index.md`** - This is the home page for your site. You can have as many additional pages as you’d like, but you should always have a home page, too.
+- Framework → Notebook Kit: index.md → `nbks/index.html` (a markdown heading, a pinned JS cell showing the generator code, a markdown note and an `html` output cell).
+- Framework `observablehq.config.js`, `.observablehq/` cache and `rimraf` are no longer needed.
+- Markup that JavaScript touches is created in a JS cell with `html` (cells run in dependency order, not page order, so the DOM must exist before code looks for it).
 
-**`src/data`** - You can put [data loaders](https://observablehq.com/framework/loaders) or static data files anywhere in your source root, but we recommend putting them here.
+## Differences from the original
 
-**`src/components`** - You can put shared [JavaScript modules](https://observablehq.com/framework/javascript/imports) anywhere in your source root, but we recommend putting them here. This helps you pull code out of Markdown files and into JavaScript modules, making it easier to reuse code across pages, write tests and run linters, and even share code with vanilla web applications.
-
-**`observablehq.config.js`** - This is the [project configuration](https://observablehq.com/framework/config) file, such as the pages and sections in the sidebar navigation, and the project’s title.
-
-## Command reference
-
-| Command           | Description                                              |
-| ----------------- | -------------------------------------------------------- |
-| `npm install`            | Install or reinstall dependencies                        |
-| `npm run dev`        | Start local preview server                               |
-| `npm run build`      | Build your static site, generating `./dist`              |
-| `npm run deploy`     | Deploy your project to Observable                        |
-| `npm run clean`      | Clear the local data loader cache                        |
-| `npm run observable` | Run commands like `observable help`                      |
+- Fonts: none changed (theme fonts from the Kit).
+- Page chrome (sidebar, header, footer, pager) is gone; Notebook Kit has none.

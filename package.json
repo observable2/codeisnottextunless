@@ -1,20 +1,12 @@
 {
-  "type": "module",
+  "name": "codeisnottextunless_o2",
+  "version": "0.0.1",
   "private": true,
-  "scripts": {
-    "clean": "rimraf src/.observablehq/cache",
-    "build": "rimraf dist && observable build",
-    "dev": "observable preview",
-    "deploy": "observable deploy",
-    "observable": "observable"
-  },
   "dependencies": {
-    "@observablehq/framework": "^1.13.4"
+    "@observablehq/notebook-kit": "latest"
   },
-  "devDependencies": {
-    "rimraf": "^6.1.3"
-  },
-  "engines": {
-    "node": ">=18"
+  "scripts": {
+    "preview": "notebooks preview --root nbks --template nbks/custom.tmpl",
+    "build": "notebooks build --root nbks --template nbks/custom.tmpl --out ../dist -- nbks/*.html"
   }
 }

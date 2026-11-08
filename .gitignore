@@ -1,4 +1,10 @@
+*.log
+*.bak
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 .DS_Store
-/dist/
+CLAUDE.md
+.vscode/
+dist/
 node_modules/
-yarn-error.log
